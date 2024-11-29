@@ -1,23 +1,14 @@
-from fastapi import FastAPI, Depends
-from app.authentication import authenticate
-from app.models import EmbeddingRequest, EmbeddingResponse
-from app.utils import get_embedding
+from fastapi import FastAPI
+from app.routes import health, embeddings
+from app.config.environment import get_environment_variables
+
+env = get_environment_variables()
 
 app = FastAPI(
-  title = "Mirai Embedding API",
-  description="This project is a FastAPI-based application that generates text embeddings using a pre-trained language model.",
-  version="1.0.0"
+  title=env.API_TITLE,
+  description=env.API_DESCRIPTION,
+  version=env.API_VERSION,
 )
 
-@app.get("/health", tags=["Health Check"])
-async def health():
-  return {"status": "healthy"}
-
-@app.post(
-  "/embed", 
-  tags=["Embeddings"], 
-  dependencies=[Depends(authenticate)], 
-  response_model=EmbeddingResponse)
-async def generate_embedding(request: EmbeddingRequest):
-  embedding = get_embedding(request.text)
-  return EmbeddingResponse(embedding=embedding)
+app.include_router(health.router)
+app.include_router(embeddings.router)
