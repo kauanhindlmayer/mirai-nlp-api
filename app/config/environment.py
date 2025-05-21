@@ -9,8 +9,8 @@ def get_env_filename():
   return f".env.{runtime_env}" if runtime_env else ".env"
 
 class EnvironmentSettings(BaseSettings):
-  API_TITLE: str = "Mirai Embedding API"
-  API_DESCRIPTION: str = "This project is a FastAPI-based application that generates text embeddings using a pre-trained language model."
+  API_TITLE: str = "Mirai NLP API"
+  API_DESCRIPTION: str = "This project is a FastAPI-based application that provides Natural Language Processing (NLP) capabilities."
   API_VERSION: str
   API_KEY: str
 

@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
-from app.models.embeddings import EmbeddingRequest, EmbeddingResponse
+from app.models.embedding import EmbeddingRequest, EmbeddingResponse
 from app.services.auth_service import authenticate
 from app.services.embedding_service import get_embedding_service, EmbeddingService
 
-router = APIRouter(tags=["Embeddings"])
+router = APIRouter(tags=["Embedding"])
 
 @router.post(
   "/embed",

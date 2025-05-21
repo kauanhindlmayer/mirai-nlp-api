@@ -1,6 +1,6 @@
-# Mirai Embedding API
+# Mirai NLP API
 
-This project is a FastAPI-based application that generates text embeddings using a pre-trained language model.
+This project is a FastAPI-based application that provides Natural Language Processing (NLP) capabilities, including text embedding generation and text summarization using pre-trained language models.
 
 ## Getting Started
 

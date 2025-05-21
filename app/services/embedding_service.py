@@ -1,5 +1,4 @@
 from transformers import AutoTokenizer, AutoModel
-import torch
 
 class EmbeddingService:
   def __init__(self, model_name="sentence-transformers/all-MiniLM-L6-v2"):
