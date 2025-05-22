@@ -13,5 +13,6 @@ class SummarizationService:
     result = self.summarizer(text, max_length=130, min_length=30, do_sample=False)
     return result[0]["summary_text"]
 
+@lru_cache()
 def get_summarization_service():
   return SummarizationService()

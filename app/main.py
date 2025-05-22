@@ -1,12 +1,25 @@
-from fastapi import FastAPI
+import logging
+import time
+
 from contextlib import asynccontextmanager
-from app.routes import embedding_router, summarization_router, health_router
-from app.services.summarization_service import get_summarization_pipeline
+from fastapi import FastAPI
+
 from app.config.environment import get_environment_variables
+from app.routes import embedding_router, summarization_router, health_router
+from app.services.embedding_service import get_embedding_service
+from app.services.summarization_service import get_summarization_service
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-  get_summarization_pipeline()
+  logger.info("Starting model warm-up...")
+  start_time = time.time()
+  get_summarization_service()
+  get_embedding_service()
+  elapsed = time.time() - start_time
+  logger.info(f"Model warm-up complete in {elapsed:.2f} seconds.")
   yield
 
 env = get_environment_variables()
